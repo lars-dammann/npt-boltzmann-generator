@@ -1,0 +1,71 @@
+{
+    "encoder_model": "EGNN",
+    "encoder_kwargs": {
+        "n_dim": 3,
+        "n_volume": 0,
+        "n_particles": 2,
+        "hidden_nf": 64,
+        "edge_feat_nf": 1,
+        "n_layers": 4,
+        "attention": true,
+        "init_weights_std": 0.15,
+        "init_weights_att_gain": 0.2,
+        "norm_constant": 1
+    },
+    "decoder_model": "EGNN",
+    "decoder_kwargs": {
+        "n_dim": 3,
+        "n_volume": 0,
+        "n_particles": 2,
+        "hidden_nf": 64,
+        "edge_feat_nf": 1,
+        "n_layers": 4,
+        "attention": true,
+        "init_weights_std": 0.15,
+        "init_weights_att_gain": 0.2,
+        "norm_constant": 1
+    },
+    "latent_distribution": "PositionVolumePrior",
+    "latent_distribution_kwargs": {
+        "n_dim": 3,
+        "n_volume": 0,
+        "n_particles": 2
+    },
+    "real_distribution": "DoubleWellDistribution",
+    "real_distribution_kwargs": {
+        "n_dim": 3,
+        "n_particles": 2,
+        "a": 0.0,
+        "b": -4.0,
+        "c": 0.9,
+        "offs": 4.0
+    },
+    "data_kwargs": {
+        "n_dim": 3,
+        "n_volume": 0,
+        "n_particles": 2,
+        "train_batch_size": 1024,
+        "val_batch_size": 4096,
+        "test_batch_size": 4096,
+        "data_paths": {
+            "molecular": "data/molecular/dw-100000samples-2particles-3dim.npy",
+            "latent": "data/latent/gaussian-100000samples-2particles-3dim.npy"
+        },
+        "training_mode": "molecular",
+        "validation_mode": "both"
+    },
+    "flowmodel_kwargs": {
+        "n_dim": 3,
+        "n_volume": 0,
+        "n_particles": 2,
+        "loss_weights": {
+            "nll": 1.0,
+            "reconstruction": 200.0,
+            "latent": 1.0,
+            "real": 1.0
+        },
+        "n_hutchinson_samples": 1,
+        "lr": 0.001
+    },
+    "checkpoint_path": "checkpoints"
+}
